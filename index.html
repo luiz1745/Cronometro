@@ -37,19 +37,20 @@
     </div>
 
     <script>
-        // Definindo uma data fixa (por exemplo, 1 de janeiro de 2025)
-        const dataInicio = new Date('2025-01-01T00:00:00'); // Data fixa
-        const dataInicialEmMs = dataInicio.getTime(); // Convertendo para milissegundos
+        // Definir a data fixa (exemplo: 1º de janeiro de 2025)
+        const dataInicio = new Date(2025, 0, 1); // 0 é janeiro
+        const dataInicialEmMs = dataInicio.getTime(); // Converter para milissegundos
 
         // Função para atualizar o tempo decorrido desde a data fixa
         function atualizarTempo() {
             const agora = Date.now(); // Hora atual
-            const diferenca = (agora - dataInicialEmMs) / 1000; // Tempo em segundos
+            const diferenca = agora - dataInicialEmMs; // Diferença em milissegundos
 
             // Calcular horas, minutos e segundos
-            const horas = Math.floor(diferenca / 3600);
-            const minutos = Math.floor((diferenca % 3600) / 60);
-            const segundos = Math.floor(diferenca % 60);
+            const segundosTotais = Math.floor(diferenca / 1000); // Total de segundos
+            const horas = Math.floor(segundosTotais / 3600); // Calcular horas
+            const minutos = Math.floor((segundosTotais % 3600) / 60); // Calcular minutos
+            const segundos = segundosTotais % 60; // Calcular segundos
 
             // Exibir o tempo no formato desejado
             document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
