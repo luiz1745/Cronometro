@@ -3,17 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cronômetro</title>
-    <link rel="stylesheet" href="cronometro.css">
-    <link rel="" href="cronometro.js"
+    <title>Tempo Decorrido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        #tempo {
+            font-size: 2em;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Cronômetro apartir 28 de fevereiro de 2025!</h1>
-        <div id="countdown">
-            <p id="time"></p>
-        </div>
+        <h1>Tempo Decorrido</h1>
+        <p id="tempo">0 horas, 0 minutos e 0 segundos</p>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // Hora inicial
+        const inicio = Date.now();
+
+        // Função para atualizar o tempo decorrido
+        function atualizarTempo() {
+            const agora = Date.now();
+            const diferenca = (agora - inicio) / 1000; // tempo em segundos
+
+            // Calcular horas, minutos e segundos
+            const horas = Math.floor(diferenca / 3600);
+            const minutos = Math.floor((diferenca % 3600) / 60);
+            const segundos = Math.floor(diferenca % 60);
+
+            // Exibir o tempo no formato desejado
+            document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+        }
+
+        // Atualizar o tempo a cada segundo
+        setInterval(atualizarTempo, 1000);
+    </script>
 </body>
 </html>
