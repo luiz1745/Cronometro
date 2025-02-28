@@ -1,63 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tempo Decorrido</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        h1 {
-            color: #4CAF50;
-        }
-        #tempo {
-            font-size: 2em;
-            margin-top: 20px;
-            font-weight: bold;
-            color: #555;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo Decorrido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    #tempo {
+      font-size: 2em;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tempo Decorrido</h1>
-        <p id="tempo">0 horas, 0 minutos e 0 segundos</p>
-    </div>
+  <h1>Tempo Decorrido</h1>
+  <p id="tempo">Calculando...</p>
 
-    <script>
-        // Definir a data fixa (exemplo: 1º de janeiro de 2025)
-        const dataInicio = new Date(2025, 0, 1); // 0 é janeiro
-        const dataInicialEmMs = dataInicio.getTime(); // Converter para milissegundos
-
-        // Função para atualizar o tempo decorrido desde a data fixa
-        function atualizarTempo() {
-            const agora = Date.now(); // Hora atual
-            const diferenca = agora - dataInicialEmMs; // Diferença em milissegundos
-
-            // Calcular horas, minutos e segundos
-            const segundosTotais = Math.floor(diferenca / 1000); // Total de segundos
-            const horas = Math.floor(segundosTotais / 3600); // Calcular horas
-            const minutos = Math.floor((segundosTotais % 3600) / 60); // Calcular minutos
-            const segundos = segundosTotais % 60; // Calcular segundos
-
-            // Exibir o tempo no formato desejado
-            document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
-        }
-
-        // Atualizar o tempo a cada segundo
-        setInterval(atualizarTempo, 1000);
-    </script>
+  <script>
+    // Para testar, definimos a data fixa como 5 segundos atrás da hora atual.
+    // Se preferir uma data específica, substitua a linha abaixo, por exemplo:
+    // const fixedStart = new Date(2025, 0, 1, 0, 0, 0);
+    const fixedStart = new Date(Date.now() - 5000);
+    
+    // Data atual para calcular a diferença
+    const now = new Date();
+    // Diferença em milissegundos
+    const diffMs = now - fixedStart;
+    // Converter para segundos
+    const totalSeconds = Math.floor(diffMs / 1000);
+    
+    // Calcular horas, minutos e segundos
+    const horas = Math.floor(totalSeconds / 3600);
+    const minutos = Math.floor((totalSeconds % 3600) / 60);
+    const segundos = totalSeconds % 60;
+    
+    // Exibe o resultado de forma fixa (sem atualização contínua)
+    document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+  </script>
 </body>
 </html>
