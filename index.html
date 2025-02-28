@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tempo Decorrido</title>
+  <title>Contador de Tempo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 50px;
-      background-color: #f4f4f4;
+      background: #f4f4f4;
       color: #333;
+      margin-top: 50px;
     }
     h1 {
       color: #4CAF50;
@@ -19,39 +19,29 @@
       font-size: 2em;
       margin-top: 20px;
       font-weight: bold;
-      color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>Tempo Decorrido desde 01/01/2025</h1>
-  <p id="tempo">Calculando...</p>
+  <h1>Tempo Decorrido desde a meia-noite de 28 de fevereiro de 2025</h1>
+  <p id="tempo">Carregando...</p>
 
   <script>
-    // Define a data fixa para iniciar a contagem: 1 de janeiro de 2025
-    const fixedStart = new Date(2025, 0, 1, 0, 0, 0);
+    // Define a data fixa: meia-noite de 28 de fevereiro de 2025 (lembre: mês 1 é fevereiro)
+    const fixedStart = new Date(2025, 1, 28, 0, 0, 0);
 
-    // Função que atualiza o tempo decorrido
     function atualizarTempo() {
       const agora = new Date();
-      // Diferença em milissegundos entre agora e a data fixa
-      const diferenca = agora - fixedStart;
-      // Converte a diferença para segundos
-      const totalSeconds = Math.floor(diferenca / 1000);
-      
-      // Calcula horas, minutos e segundos
+      const diferencaMs = agora - fixedStart;
+      const totalSeconds = Math.floor(diferencaMs / 1000);
       const horas = Math.floor(totalSeconds / 3600);
       const minutos = Math.floor((totalSeconds % 3600) / 60);
       const segundos = totalSeconds % 60;
-      
-      // Atualiza o conteúdo do elemento com o tempo formatado
       document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
     }
 
-    // Chama a função de atualização a cada 1 segundo
-    setInterval(atualizarTempo, 1000);
-    // Chamada imediata para não esperar 1 segundo
     atualizarTempo();
+    setInterval(atualizarTempo, 1000);
   </script>
 </body>
 </html>
