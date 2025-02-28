@@ -24,29 +24,34 @@
   </style>
 </head>
 <body>
-  <h1>Tempo Decorrido</h1>
+  <h1>Tempo Decorrido desde 01/01/2025</h1>
   <p id="tempo">Calculando...</p>
 
   <script>
-    // Para testar, definimos a data fixa como 5 segundos atrás da hora atual.
-    // Se preferir uma data específica, substitua a linha abaixo, por exemplo:
-    // const fixedStart = new Date(2025, 0, 1, 0, 0, 0);
-    const fixedStart = new Date(Date.now() - 5000);
-    
-    // Data atual para calcular a diferença
-    const now = new Date();
-    // Diferença em milissegundos
-    const diffMs = now - fixedStart;
-    // Converter para segundos
-    const totalSeconds = Math.floor(diffMs / 1000);
-    
-    // Calcular horas, minutos e segundos
-    const horas = Math.floor(totalSeconds / 3600);
-    const minutos = Math.floor((totalSeconds % 3600) / 60);
-    const segundos = totalSeconds % 60;
-    
-    // Exibe o resultado de forma fixa (sem atualização contínua)
-    document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+    // Define a data fixa para iniciar a contagem: 1 de janeiro de 2025
+    const fixedStart = new Date(2025, 0, 1, 0, 0, 0);
+
+    // Função que atualiza o tempo decorrido
+    function atualizarTempo() {
+      const agora = new Date();
+      // Diferença em milissegundos entre agora e a data fixa
+      const diferenca = agora - fixedStart;
+      // Converte a diferença para segundos
+      const totalSeconds = Math.floor(diferenca / 1000);
+      
+      // Calcula horas, minutos e segundos
+      const horas = Math.floor(totalSeconds / 3600);
+      const minutos = Math.floor((totalSeconds % 3600) / 60);
+      const segundos = totalSeconds % 60;
+      
+      // Atualiza o conteúdo do elemento com o tempo formatado
+      document.getElementById('tempo').textContent = `${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+    }
+
+    // Chama a função de atualização a cada 1 segundo
+    setInterval(atualizarTempo, 1000);
+    // Chamada imediata para não esperar 1 segundo
+    atualizarTempo();
   </script>
 </body>
 </html>
